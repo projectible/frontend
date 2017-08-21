@@ -6,4 +6,4 @@ ADD .docker_build/backend /opt/bin/backend
 ADD ./templates /opt/templates
 ADD ./static /opt/static
 
-CMD ["/opt/bin/projectible-backend"]
+CMD ["/opt/bin/backend"]
