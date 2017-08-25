@@ -37,7 +37,13 @@ $(window).resize(function() {
     if ($(window).width() < 768) {
         adjustForMobile();
     }
+    if ($(window).width() >= 768) {
+        adjustForDesktop();
+    }
 });
 function adjustForMobile() {
     $("#wrapper").removeClass("toggled");
+}
+function adjustForDesktop() {
+    $("#wrapper").addClass("toggled");
 }
