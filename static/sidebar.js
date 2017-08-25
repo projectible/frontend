@@ -29,3 +29,15 @@ $("#settings").click(function(e) {
     $("#settingsRow").css('background','#47525D')
     selectedRow = "#settingsRow";
 });
+
+if ($(window).width() < 768) {
+    adjustForMobile();
+}
+$(window).resize(function() {
+    if ($(window).width() < 768) {
+        adjustForMobile();
+    }
+});
+function adjustForMobile() {
+    $("#wrapper").removeClass("toggled");
+}
