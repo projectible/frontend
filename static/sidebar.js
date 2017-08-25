@@ -33,14 +33,9 @@ $("#settings").click(function(e) {
 if ($(window).width() < 768) {
     adjustForMobile();
 }
-$(window).resize(function() {
-    if ($(window).width() < 768) {
-        adjustForMobile();
-    }
-    if ($(window).width() >= 768) {
-        adjustForDesktop();
-    }
-});
+else {
+    adjustForDesktop();
+}
 function adjustForMobile() {
     $("#wrapper").removeClass("toggled");
 }
