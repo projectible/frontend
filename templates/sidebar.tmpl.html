@@ -74,38 +74,12 @@
         </ul>
     </div>
         
+    <script src="static/sidebar.js"></script>
+    
     <div id="page-content-wrapper">
         <div class="container-fluid">
             {{template "body.tmpl.html"}}
         </div>
     </div>
-
-    <script>
-        $("#chartsRow").css('background','#47525D')
-        var selectedRow = "#chartsRow";
-
-        $("#menu-toggle").click(function(e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-        $("#charts").click(function(e) {
-            e.preventDefault();
-            $(selectedRow).css('background','')
-            $("#chartsRow").css('background','#47525D')
-            selectedRow = "#chartsRow";
-        });
-        $("#heatmap").click(function(e) {
-            e.preventDefault();
-            $(selectedRow).css('background','')
-            $("#heatmapRow").css('background','#47525D')
-            selectedRow = "#heatmapRow";
-        });
-        $("#settings").click(function(e) {
-            e.preventDefault();
-            $(selectedRow).css('background','')
-            $("#settingsRow").css('background','#47525D')
-            selectedRow = "#settingsRow";
-        });
-    </script>
 
 </div>
