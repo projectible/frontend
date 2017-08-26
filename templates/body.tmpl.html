@@ -7,7 +7,7 @@
         <div class="col-md-4 center">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <canvas id="weeklyUsers" width="400" height="350"></canvas>
                 </div>
             </div>
         </div>
@@ -15,7 +15,10 @@
         <div class="col-md-4 center">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img src="static/totalUsers.png">
+                    <h4>Currently</h4>
+                    <h1 style="font-size: 800%;">12</h1>
+                    Active visitors in your world
+                    <canvas id="currentUserType" width="400" height="100"></canvas>
                 </div>
             </div>
         </div>
@@ -23,7 +26,7 @@
         <div class="col-md-4 center">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img src="static/usersMonthly.png">
+                    <canvas id="monthlyUsers" width="400" height="350"></canvas>
                 </div>
             </div>
         </div>
@@ -35,7 +38,7 @@
         <div class="col-md-3 center">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img src="static/weeklyUserRatio.png">
+                    <canvas id="weeklyUserRatio" width="400" height="350"></canvas>
                 </div>
             </div>
         </div>
@@ -43,7 +46,9 @@
         <div class="col-md-6 center">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img src="static/currentUsers.png" style="width: 350">
+                    <h1 style="font-size: 500%;">9,145</h1>
+                    <span style="font-size: 125%; color: #89BFDD;">Users </span>
+                    <span style="font-size: 125%; color: #969696;">this year</span>
                 </div>
             </div>
         </div>
@@ -51,7 +56,7 @@
         <div class="col-md-3 center">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img src="static/yearlyBrowserUse.png">
+                    <canvas id="yearlyBrowserUse" width="400" height="350"></canvas>
                 </div>
             </div>
         </div>
@@ -87,7 +92,7 @@
     </div> -->
 
     <script src="static/charts.js"></script>
-    
+
 </div>
 
 <div id="heatmapRowBody" style="display: none;">
