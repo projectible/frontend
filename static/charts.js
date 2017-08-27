@@ -28,13 +28,13 @@ var currentUserType = new Chart(currentUserTypeCtx, {
     data: {
         labels: [""],
         datasets: [{
-            label: 'New',
+            label: 'New %',
             backgroundColor: "#048DC7",
             data: [
                 42,
             ]
         }, {
-            label: 'Returning',
+            label: 'Returning %',
             backgroundColor: "#50B431",
             data: [
                 58,
@@ -52,7 +52,15 @@ var currentUserType = new Chart(currentUserTypeCtx, {
                 stacked: true,
             }],
             yAxes: [{
-                stacked: true
+                stacked: true,
+                ticks: {
+                   min: 0,
+                   max: 100,
+                },  
+				scaleLabel: {
+                   display: true,
+                   labelString: "Percentage"
+                }
             }]
         }
     }
@@ -86,10 +94,10 @@ var weeklyUserRatioCtx = document.getElementById("weeklyUserRatio");
 var weeklyUserRatio = new Chart(weeklyUserRatioCtx, {
     type: 'doughnut',
     data: {
-        labels: ["New Visitor", "Returning Visitor"],
+        labels: ["New Visitor %", "Returning Visitor %"],
         datasets: [{
-            label: "Weekly User Ratio",
-            data: [46, 86],
+            label: "Percentage",
+            data: [36.8, 63.2],
             backgroundColor: [
                 "rgb(255, 99, 132)",
                 "rgb(54, 162, 235)",                
