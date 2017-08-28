@@ -14,7 +14,7 @@ $("#charts").click(function(e) {
     $("#chartsRowBody").show();
     $("#chartsRow").css('background','#47525D')
     selectedRow = "#chartsRow";
-    loadCharts();
+    // loadCharts();
 });
 $("#heatmap").click(function(e) {
     e.preventDefault();
@@ -49,6 +49,6 @@ function adjustForDesktop() {
 }
 function checkForCharts() {
     if (selectedRow == "#chartsRow") {
-        destroyCharts();
+        // destroyCharts();
     }
 }
