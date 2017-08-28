@@ -1,5 +1,6 @@
 $("#chartsRow").css('background','#47525D')
 var selectedRow = "#chartsRow";
+loadCharts();
 
 $("#menu-toggle").click(function(e) {
     e.preventDefault();
@@ -7,14 +8,17 @@ $("#menu-toggle").click(function(e) {
 });
 $("#charts").click(function(e) {
     e.preventDefault();
+    checkForCharts();
     $(selectedRow).css('background','')
     $(selectedRow + "Body").hide();
     $("#chartsRowBody").show();
     $("#chartsRow").css('background','#47525D')
     selectedRow = "#chartsRow";
+    loadCharts();
 });
 $("#heatmap").click(function(e) {
     e.preventDefault();
+    checkForCharts();
     $(selectedRow).css('background','')
     $(selectedRow + "Body").hide();
     $("#heatmapRowBody").show();
@@ -23,6 +27,7 @@ $("#heatmap").click(function(e) {
 });
 $("#settings").click(function(e) {
     e.preventDefault();
+    checkForCharts();
     $(selectedRow).css('background','')
     $(selectedRow + "Body").hide();
     $("#settingsRowBody").show();
@@ -41,4 +46,9 @@ function adjustForMobile() {
 }
 function adjustForDesktop() {
     $("#wrapper").addClass("toggled");
+}
+function checkForCharts() {
+    if (selectedRow == "#chartsRow") {
+        destroyCharts();
+    }
 }
