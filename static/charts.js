@@ -75,13 +75,24 @@ function loadCharts()
     });
 
     var monthlyUsersCtx = document.getElementById("monthlyUsers");
+    var d = new Date();
+    todaysMonth = d.getMonth() + 1;
+    todaysDay = d.getDate();
+    daysOfMonth = [];
+    dataOfMonth = [];
+    for (var index = 1; index <= daysInThisMonth(); index++) {
+        daysOfMonth.push(todaysMonth + "/" + index.toString());
+        if (index <= todaysDay) {
+            dataOfMonth.push(Math.floor(Math.random() * 80));
+        }
+    }
     monthlyUsers = new Chart(monthlyUsersCtx, {
         type: 'line',
         data: {
-            labels: ["08/01", "08/08", "08/15", "08/22", "08/29"],
+            labels: daysOfMonth,
             datasets: [{
                 label: '# of users this month',
-                data: [121, 109, 234, 452, 329, 30, 143, 12, 62, 75, 39, 10, 102, 539],
+                data: dataOfMonth,
                 borderColor: 'rgb(0, 0, 255)',
                 fill: false,
                 borderWidth: 1
@@ -155,3 +166,47 @@ function destroyCharts()
     weeklyUserRatio.destroy();
     yearlyBrowserUse.destroy();
 }
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);  // add label at end
+    chart.data.labels.splice(0, 1); // remove first label
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);    // add data at end
+        dataset.data.splice(0, 1);  // remove first data point
+    });
+    chart.update();
+}
+
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
+
+function daysInThisMonth() {
+    var now = new Date();
+    return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+}
+
+setInterval(function(){
+    var lastValue = monthlyUsers.data.datasets[0].data.pop();
+    lastValue += 2;
+    monthlyUsers.data.datasets[0].data.push(lastValue);
+    monthlyUsers.update();
+
+    var currentVisitorCount = Math.floor(Math.random() * 12);
+    $("#currentVisitors").text(currentVisitorCount.toString());
+
+    var percentOfNew = Math.floor(Math.random() * 100);
+    var percentOfReturn = 100 - percentOfNew;
+    var dataset1 = {label: "New %", backgroundColor: "#048DC7", data: [percentOfNew]};
+    var dataset2 = {label: "Returning %", backgroundColor: "#50B431", data: [percentOfReturn]};
+    currentUserType.data.datasets.pop();
+    currentUserType.data.datasets.pop();
+    currentUserType.data.datasets.push(dataset1);
+    currentUserType.data.datasets.push(dataset2);
+    currentUserType.update();
+
+}, 1000);
