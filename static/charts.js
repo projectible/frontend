@@ -6,14 +6,22 @@ var yearlyBrowserUse;
 
 function loadCharts() 
 {
+    var date = new Date();    
+
     var weeklyUsersCtx = document.getElementById("weeklyUsers");
+    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    todaysDay = date.getDay();
+    var dataOfWeek = [];
+    for (var index = 0; index <= todaysDay; index++) {
+        dataOfWeek.push(Math.floor(Math.random() * 120));
+    }
     weeklyUsers = new Chart(weeklyUsersCtx, {
         type: 'line',
         data: {
-            labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            labels: days,
             datasets: [{
                 label: '# of users this week',
-                data: [121, 109, 34, 52, 29, 30, 43],
+                data: dataOfWeek,
                 borderColor: 'rgba(255,99,132,1)',
                 fill: false,
                 borderWidth: 1
@@ -75,11 +83,10 @@ function loadCharts()
     });
 
     var monthlyUsersCtx = document.getElementById("monthlyUsers");
-    var d = new Date();
-    todaysMonth = d.getMonth() + 1;
-    todaysDay = d.getDate();
-    daysOfMonth = [];
-    dataOfMonth = [];
+    var todaysMonth = date.getMonth() + 1;
+    var todaysDay = date.getDate();
+    var daysOfMonth = [];
+    var dataOfMonth = [];
     for (var index = 1; index <= daysInThisMonth(); index++) {
         daysOfMonth.push(todaysMonth + "/" + index.toString());
         if (index <= todaysDay) {
@@ -199,6 +206,14 @@ setInterval(function(){
     var currentVisitorCount = Math.floor(Math.random() * 12);
     $("#currentVisitors").text(currentVisitorCount.toString());
 
+    var yearlyVisitorCount = Number($("#yearlyVisitors").text()) + currentVisitorCount % 2;
+    $("#yearlyVisitors").text(yearlyVisitorCount.toString());
+
+    var lastValue2 = weeklyUsers.data.datasets[0].data.pop();
+    lastValue2 += 1;
+    weeklyUsers.data.datasets[0].data.push(lastValue2);
+    weeklyUsers.update();
+
     var percentOfNew = Math.floor(Math.random() * 100);
     var percentOfReturn = 100 - percentOfNew;
     var dataset1 = {label: "New %", backgroundColor: "#048DC7", data: [percentOfNew]};
@@ -207,6 +222,6 @@ setInterval(function(){
     currentUserType.data.datasets.pop();
     currentUserType.data.datasets.push(dataset1);
     currentUserType.data.datasets.push(dataset2);
-    currentUserType.update();
+    currentUserType.update(0);
 
 }, 1000);
