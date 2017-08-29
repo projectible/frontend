@@ -98,7 +98,7 @@ function loadCharts()
         data: {
             labels: daysOfMonth,
             datasets: [{
-                label: '# of users this month',
+                label: "# of users this day of today's month",
                 data: dataOfMonth,
                 borderColor: 'rgb(0, 0, 255)',
                 fill: false,
@@ -123,7 +123,7 @@ function loadCharts()
             labels: ["New Visitor %", "Returning Visitor %"],
             datasets: [{
                 label: "Percentage",
-                data: [36.8, 63.2],
+                data: [37, 63],
                 backgroundColor: [
                     "rgb(255, 99, 132)",
                     "rgb(54, 162, 235)",                
@@ -198,22 +198,27 @@ function daysInThisMonth() {
 }
 
 setInterval(function(){
+    // updating monthly users chart
     var lastValue = monthlyUsers.data.datasets[0].data.pop();
     lastValue += 2;
     monthlyUsers.data.datasets[0].data.push(lastValue);
     monthlyUsers.update();
 
-    var currentVisitorCount = Math.floor(Math.random() * 12);
+    // updating current users count
+    var currentVisitorCount = Math.floor(Math.random() * 12) + 1;
     $("#currentVisitors").text(currentVisitorCount.toString());
 
+    // updating the yearly visitors
     var yearlyVisitorCount = Number($("#yearlyVisitors").text()) + currentVisitorCount % 2;
     $("#yearlyVisitors").text(yearlyVisitorCount.toString());
 
+    // updating the weekly users
     var lastValue2 = weeklyUsers.data.datasets[0].data.pop();
     lastValue2 += 1;
     weeklyUsers.data.datasets[0].data.push(lastValue2);
     weeklyUsers.update();
 
+    // updating current user ratio
     var percentOfNew = Math.floor(Math.random() * 100);
     var percentOfReturn = 100 - percentOfNew;
     var dataset1 = {label: "New %", backgroundColor: "#048DC7", data: [percentOfNew]};
@@ -222,6 +227,19 @@ setInterval(function(){
     currentUserType.data.datasets.pop();
     currentUserType.data.datasets.push(dataset1);
     currentUserType.data.datasets.push(dataset2);
-    currentUserType.update(0);
+    currentUserType.update();
 
-}, 1000);
+    // updating weekly user ratio
+    var previousReturnRatio = weeklyUserRatio.data.datasets[0].data.pop();
+    var previousNewRatio = weeklyUserRatio.data.datasets[0].data.pop();
+    weeklyUserRatio.data.datasets[0].data.push(Math.floor((previousReturnRatio + percentOfReturn) / 2));
+    weeklyUserRatio.data.datasets[0].data.push(Math.floor((previousNewRatio + percentOfNew) / 2));
+    weeklyUserRatio.update();
+
+    // updating yearly browser use
+    console.log(yearlyBrowserUse.data.datasets[0].data[1]);
+    yearlyBrowserUse.data.datasets[0].data[1] = yearlyBrowserUse.data.datasets[0].data[1] + 3;
+    yearlyBrowserUse.update();
+    console.log(yearlyBrowserUse.data.datasets[0].data[1]);
+
+}, 3000);
