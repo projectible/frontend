@@ -221,24 +221,21 @@ setInterval(function(){
     // updating current user ratio
     var percentOfNew = Math.floor(Math.random() * 100);
     var percentOfReturn = 100 - percentOfNew;
-    var dataset1 = {label: "New %", backgroundColor: "#048DC7", data: [percentOfNew]};
-    var dataset2 = {label: "Returning %", backgroundColor: "#50B431", data: [percentOfReturn]};
-    currentUserType.data.datasets.pop();
-    currentUserType.data.datasets.pop();
-    currentUserType.data.datasets.push(dataset1);
-    currentUserType.data.datasets.push(dataset2);
+    currentUserType.data.datasets[0].data[0] = percentOfNew;
+    currentUserType.data.datasets[1].data[0] = percentOfReturn;
     currentUserType.update();
 
     // updating weekly user ratio
-    var previousReturnRatio = weeklyUserRatio.data.datasets[0].data.pop();
-    var previousNewRatio = weeklyUserRatio.data.datasets[0].data.pop();
-    weeklyUserRatio.data.datasets[0].data.push(Math.floor((previousReturnRatio + percentOfReturn) / 2));
-    weeklyUserRatio.data.datasets[0].data.push(Math.floor((previousNewRatio + percentOfNew) / 2));
+    var previousNewRatio = weeklyUserRatio.data.datasets[0].data[0]
+    var previousReturnRatio = weeklyUserRatio.data.datasets[0].data[1]
+    weeklyUserRatio.data.datasets[0].data[0] = Math.floor((previousNewRatio + percentOfNew) / 2);
+    weeklyUserRatio.data.datasets[0].data[1] = Math.floor((previousReturnRatio + percentOfReturn) / 2);
     weeklyUserRatio.update();
 
     // updating yearly browser use
     console.log(yearlyBrowserUse.data.datasets[0].data[1]);
-    yearlyBrowserUse.data.datasets[0].data[1] = yearlyBrowserUse.data.datasets[0].data[1] + 3;
+    yearlyBrowserUse.data.datasets[0].data[1] = yearlyBrowserUse.data.datasets[0].data[1] + Math.floor(Math.random() * 6);
+    yearlyBrowserUse.data.datasets[0].data[0] = yearlyBrowserUse.data.datasets[0].data[1] + Math.floor(Math.random() * 3);
     yearlyBrowserUse.update();
     console.log(yearlyBrowserUse.data.datasets[0].data[1]);
 
