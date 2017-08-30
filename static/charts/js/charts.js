@@ -233,10 +233,8 @@ setInterval(function(){
     weeklyUserRatio.update();
 
     // updating yearly browser use
-    console.log(yearlyBrowserUse.data.datasets[0].data[1]);
     yearlyBrowserUse.data.datasets[0].data[1] = yearlyBrowserUse.data.datasets[0].data[1] + Math.floor(Math.random() * 6);
     yearlyBrowserUse.data.datasets[0].data[0] = yearlyBrowserUse.data.datasets[0].data[1] + Math.floor(Math.random() * 3);
     yearlyBrowserUse.update();
-    console.log(yearlyBrowserUse.data.datasets[0].data[1]);
 
 }, 3000);

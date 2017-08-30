@@ -1,0 +1,24 @@
+<html>
+    {{template "main.header.tmpl.html"}}
+  
+    <body>
+
+        <div id="wrapper" class="toggled">
+
+            {{template "dashboard.sidebar.tmpl.html"}}
+
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    {{template "dashboard.charts.tmpl.html"}}
+                    {{template "dashboard.heatmap.tmpl.html"}}
+                    {{template "dashboard.settings.tmpl.html"}}
+                </div>
+            </div>
+
+            <script src="/static/sidebar/js/sidebar.js"></script>
+
+        </div>
+
+    </body>
+
+</html>
