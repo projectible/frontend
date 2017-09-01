@@ -17,7 +17,8 @@ func main() {
 	router := gin.Default()
 	router.Use(gin.Logger())
 	router.LoadHTMLGlob("templates/**/*.html")
-	router.Static("/static", "static")
+	router.Static("/static", "./static")
+	router.Static("/node_modules", "./node_modules")
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "main.index.tmpl.html", nil)
